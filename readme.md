@@ -10,7 +10,7 @@ A practical checklist for maintaining the security and integrity of your website
 - [ ] Update web server software (e.g., Apache, Nginx)
 - [ ] Disable unused services (FTP, Telnet, etc.)
 - [ ] Ensure firewall rules are active (e.g., UFW, iptables)
-- [ ] Run port scan: `sudo nmap -sS gmnextgen.com`
+- [ ] Run port scan: `sudo nmap -sS xyz.com`
 
 ---
 
@@ -56,9 +56,9 @@ A practical checklist for maintaining the security and integrity of your website
 ## 🛡️ 6. External Vulnerability Testing
 
 - [ ] Run Nmap vuln script:  
-  `sudo nmap -sV --script vuln gmnextgen.com`
+  `sudo nmap -sV --script vuln xyz.com`
 - [ ] Run Nikto scan:  
-  `nikto -h https://gmnextgen.com`
+  `nikto -h https://xyz.com`
 - [ ] Run full OWASP ZAP scan
 - [ ] Check CVEs for your software & plugins monthly
 
@@ -100,8 +100,6 @@ A practical checklist for maintaining the security and integrity of your website
 
 ---
 
-### 📎 Tip:
-You can convert this checklist into GitHub issues, project tasks, or automation scripts.
 
----
+
 
