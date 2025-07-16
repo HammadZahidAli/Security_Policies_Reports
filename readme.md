@@ -1,4 +1,4 @@
-# ✅ Monthly Website Security Checklist for gmnextgen.com
+# ✅ Monthly Website Security Checklist for xyz.com
 
 A practical checklist for maintaining the security and integrity of your website on a monthly basis.
 
