@@ -1,0 +1,50 @@
+
+                                    ┌──────────────────────────────────────────┐
+                                    │              CORPORATE IT                │
+                                    │  • MES / ERP • Engineering PCs           │
+                                    │  • Domain Controllers / Identity (AAD)   │
+                                    └────────────────┬─────────────────────────┘
+                                                     │  SSO / MFA (OIDC)
+                                                     ▼
+   ┌───────────────────────────────────────────────────────────────────────────┐
+   │                               IDENTITY PROVIDER                          │
+   │        Azure AD / Okta —– federates to IBM Cloud IAM & Google IAM        │
+   └────────────────────────────────┬──────────────────────────────────────────┘
+                                    │
+                                    │
+                                    ▼
+┌────────────────────┐    Encrypted Tunnel     ┌───────────────────────────────┐
+│   FACTORY / OT     │  (IPsec or DirectLink)  │   INDUSTRIAL SECURE EDGE      │
+│  • PLC / SCADA     │────────────────────────▶│  • Rugged Gateway             │
+│  • Sensors         │                         │  • Suricata IDS/IPS           │
+│  • Data Historian  │                         │  • VPN / DirectLink Term      │
+└─────────┬──────────┘                         └─────────────┬─────────────────┘
+          │                                                 │
+          │                                                 │
+          ▼                                                 ▼
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                                IBM CLOUD VPC                                  │
+│  (Production‑critical, low‑latency workloads)                                 │
+│  ────────────────────────────────────────────────────────────────────────────  │
+│  • IBM Cloud Kubernetes Service (IKS)  ← hot process data                     │
+│  • Falco Runtime Sensor on every node                                         │
+│  • Object Storage  (shot‑term / hot data)                                     │
+│  • Key Protect & Secrets Manager (keys, creds)                                │
+│  • IBM Cloud Security Advisor (posture findings) ──► Chronicle SIEM           │
+└───────────────────────────────▲───────────────────────────────────────────────┘
+                                │   Storage Transfer Service (batch, encrypted)
+                                │
+                                │
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                                GOOGLE CLOUD VPC                               │
+│  (Analytics, AI/ML, security operations)                                      │
+│  ────────────────────────────────────────────────────────────────────────────  │
+│  • Google Kubernetes Engine (GKE)  ← mirrored builds from CI/CD               │
+│  • Cloud Storage  → BigQuery (data lake / warehouse)                          │
+│  • Falco DaemonSets (runtime)                                                 │
+│  • Cloud Armor (WAF)                                                          │
+│  • Security Command Center (SCC) ───┐                                         │
+│                                     │  findings & logs                        │
+│  • **Chronicle SIEM**  ◄────────────┘  ←───── all logs (edge, IBM, GCP)       │
+│       Central SOC dashboard & threat‑hunting                                 │
+└────────────────────────────────────────────────────────────────────────────────┘
